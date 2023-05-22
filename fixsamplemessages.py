@@ -27,7 +27,7 @@ class FixSampleMessagesMarkdownBlockProcessor(BlockProcessor):
         content = f.read()
 
         extractSampleRegEx = re.compile(
-          r'#\s*fix-sent-sample:\s*%s\s*\n.*?sends a \'(?P<messageType>[^\']*)\' message\s*\n.*?"""\n(?P<messageContent>.*?)"""' % id,
+                r'#\s*fix-sent-sample:\s*%s\s*\n.*?sends a \'(?P<messageType>[^\']*)\' message:\s*\n.*?"""\n(?P<messageContent>.*?)"""' % id,
           re.MULTILINE | re.DOTALL)
         print(extractSampleRegEx)
         content_match = extractSampleRegEx.search(content)
