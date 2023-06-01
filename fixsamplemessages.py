@@ -7,9 +7,9 @@ logger = logging.getLogger('MARKDOWN')
 
 class FixSampleMessagesMarkdownBlockProcessor(BlockProcessor):
   RE = re.compile(r'''
-    (?::fix-sent-sample)\s*                     # ::fix
-    (?P<id>[a-zA-Z0-9-]+)\s*                    # FIX messageType (tag 35)
-    (?P<path>[^\s]*)\s*                         # Path to FIX data dictionary
+    (?::fix-sent-sample|::fix-received-sample)\s*    # ::fix
+    (?P<id>[a-zA-Z0-9-]+)\s*                         # FIX messageType (tag 35)
+    (?P<path>[^\s]*)\s*                              # Path to FIX data dictionary
     ''', re.VERBOSE)
 
   def test(self, parent, block):
@@ -27,7 +27,7 @@ class FixSampleMessagesMarkdownBlockProcessor(BlockProcessor):
         content = f.read()
 
         extractSampleRegEx = re.compile(
-                r'#\s*fix-sent-sample:\s*%s\s*\n.*?sends a \'(?P<messageType>[^\']*)\' message:\s*\n.*?"""\n(?P<messageContent>.*?)"""' % id,
+                r'#\s*fix-(sent|received)-sample:\s*%s\s*\n.*?(sends|receives) a (\'(?P<messageType>[^\']*)\'\s*)?message(\s*containing\s*)?:\s*\n.*?"""\n(?P<messageContent>.*?)"""' % id,
           re.MULTILINE | re.DOTALL)
         print(extractSampleRegEx)
         content_match = extractSampleRegEx.search(content)
