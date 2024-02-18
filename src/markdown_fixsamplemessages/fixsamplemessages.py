@@ -40,7 +40,7 @@ class FixSampleMessageMarkdownExtension(Extension):
     """ Add FixSampleMessageMarkdownExtension to Markdown instance. """
     blockprocessor = FixSampleMessagesMarkdownBlockProcessor(md.parser)
     blockprocessor.config = self.getConfigs()
-    md.parser.blockprocessors.add('fixsamplemessages', blockprocessor, '>code')
+    md.parser.blockprocessors.register(blockprocessor, 'fixsamplemessages', 86)
 
 
 def makeExtension(**kwargs):  # pragma: no cover
