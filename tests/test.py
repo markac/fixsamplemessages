@@ -1,4 +1,4 @@
 import markdown
-from fixsamplemessages import FixSampleMessageMarkdownExtension
+from markdown_fixsamplemessages.fixsamplemessages import FixSampleMessageMarkdownExtension
 
 markdown.markdown('::fix AE', extensions=[FixSampleMessageMarkdownExtension()])
